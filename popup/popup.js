@@ -1,59 +1,34 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//   document.getElementById('translateButton').addEventListener('click', function () {
-//     let targetLanguage = document.getElementById('targetLanguage').value;
-//     console.log(`targetLanguage: ${targetLanguage}`);
-//     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-//       console.log(tabs);
-//       chrome.scripting.executeScript({
-//         target: { tabId: tabs[0].id },
-//         func: translateArticleBody,
-//         args: [targetLanguage]
-//       })
-//         .then(() => console.log("injected a function"));
-//     });
-//   });
-// });
-
-// function translateArticleBody(targetLanguage) {
-//   console.log('translateArticleBody() called');
-//   console.log('targetLanguage: ' + targetLanguage);
-
-//   const articleBodies = document.getElementsByClassName('article-body');
-//   const articleCount = articleBodies.length;
-
-//   for (let i = 0; i < articleCount; i++) {
-//     const paragraphs = articleBodies[i].getElementsByTagName('p');
-//     const paragraphCount = paragraphs.length;
-//     for (let j = 0; j < paragraphCount; j++) {
-//       // get the paragraph text 
-//       let paragraphText = paragraphs[j].innerText;
-
-//       // translate the paragraph
-//       translation = "This is the sample text. This is the sample text. This is the sample text. This is the sample text. This is the sample text. This is the sample text.";
-
-//       // create a styled div to hold the translation
-//       let translationParagraph = document.createElement('p');
-//       translationParagraph.style.fontStyle = 'italic';
-//       translationParagraph.style.fontSize = '16px';
-//       translationParagraph.style.color = 'gray';
-//       translationParagraph.style.paddingBottom = '20px';
-//       translationParagraph.innerHTML = translation;
-
-//       // insert the translation after the original paragraph
-//       paragraphs[j].parentNode.insertBefore(translationParagraph, paragraphs[j].nextSibling);
-//     }
-//   }
-// }
-
+import { translateArticleBody } from '../handlers/translator.js';
+import { simplifyArticleBody } from '../handlers/simplifier.js';
 
 function onClickTranslate () {
     console.log("clicked translate");
+
+    let targetLanguage = document.getElementById('targetLanguage').value;
+    console.log(`targetLanguage: ${targetLanguage}`);
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    console.log(tabs);
+    chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: translateArticleBody,
+        args: [targetLanguage]
+    })
+        .then(() => console.log("start to translate"));
+    });
 }
 document.getElementById("translate-option").addEventListener("click", onClickTranslate);
 
 
 function onClickSimpleEnglish() {
     console.log("clicked simple english");
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    console.log(tabs);
+    chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: simplifyArticleBody
+    })
+        .then(() => console.log("start to generate a simple version"));
+    });
 }
 document.getElementById("simple-version-option").addEventListener("click", onClickSimpleEnglish);
 
