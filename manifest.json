@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "NewsFlex for WaPo",
+  "name": "EasyRead for WaPo",
   "version": "1.0",
-  "description": "Blablabla.",
+  "description": "EasyRead for WaPo is a Chrome extension that provides additional website customization of accessibility settings for the WaPo official website, while incorporating the capabilities of OpenAI to provide content-related features.",
   "permissions": [
     "tabs",
     "activeTab",
