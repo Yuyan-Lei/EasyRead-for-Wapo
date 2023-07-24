@@ -13,7 +13,7 @@
     "https://*/*"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "icons": {
     "16": "/images/favicon/favicon-16x16.png",
@@ -21,6 +21,6 @@
     "48": "/images/favicon/favicon-48x48.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "scripts/background.js"
   }
 }
