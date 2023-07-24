@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NewsFlex for WaPo</title>
-</head>
-<body>
-  <h2>Select Target Language:</h2>
-  <select id="targetLanguage">
-    <option value="es">Spanish</option>
-    <option value="cn">Mandarin</option>
-  </select>
-  <button id="translateButton">Translate Page</button>
-  <script src="popup.js"></script>
-</body>
+  <head>
+    <title>NewsFlex for WaPo</title>
+  </head>
+  <body>
+    <h2>Select Target Language:</h2>
+    <select id="targetLanguage">
+      <option value="es">Spanish</option>
+      <option value="cn">Mandarin</option>
+    </select>
+    <button id="translateButton">Translate Page</button>
+    <script src="popup.js"></script>
+    <script src="api/openAI.js"></script>
+    <script>
+      var summaryGenerator = new SummaryGenerator();
+      var text = summaryGenerator.getSummary();
+      console.log(text);
+    </script>
+  </body>
 </html>
