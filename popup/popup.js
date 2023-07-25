@@ -1,52 +1,77 @@
-import { translateArticleBody } from "../handlers/translator.js";
-import { simplifyArticleBody } from "../handlers/simplifier.js";
-import { getSummary } from "../handlers/summary.js";
-function onClickTranslate() {
-  console.log("clicked translate");
+import { translateArticleBody, removeTranslation } from '../handlers/translationHandler.js';
+import { simplifyArticleBody } from '../handlers/simplificationHandler.js';
+import { generateSummary, removeSummarySection } from '../handlers/summaryHandler.js';
 
-  let targetLanguage = document.getElementById("targetLanguage").value;
-  console.log(`targetLanguage: ${targetLanguage}`);
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    console.log(tabs);
-    chrome.scripting
-      .executeScript({
-        target: { tabId: tabs[0].id },
-        func: translateArticleBody,
-        args: [targetLanguage],
-      })
-      .then(() => console.log("start to translate"));
-  });
+function onClickTranslate () {
+    if (this.checked) {
+        console.log("Checked translate");
+        let targetLanguage = document.getElementById('targetLanguage').value;
+        console.log(`targetLanguage: ${targetLanguage}`);
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: translateArticleBody,
+                args: [targetLanguage]
+            })
+        });
+    } else {
+        console.log('Unchecked the translate option!');
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: removeTranslation
+            })
+        });
+    }
 }
-document
-  .getElementById("translate-option")
-  .addEventListener("click", onClickTranslate);
+document.getElementById("translate-toggle").addEventListener("change", onClickTranslate);
+
 
 function onClickSimpleEnglish() {
-  console.log("clicked simple english");
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    console.log(tabs);
-    chrome.scripting
-      .executeScript({
-        target: { tabId: tabs[0].id },
-        func: simplifyArticleBody,
-      })
-      .then(() => console.log("start to generate a simple version"));
-  });
+    if (this.checked) {
+        console.log("clicked the simple version option");
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: simplifyArticleBody
+            })
+        });
+    } else {
+        console.log("unchecked the simple version option");
+    }
 }
-document
-  .getElementById("simple-version-option")
-  .addEventListener("click", onClickSimpleEnglish);
+document.getElementById("simple-version-toggle").addEventListener("change", onClickSimpleEnglish);
+
 
 function onChangeCustomizeFont() {
-  console.log("clicked customize font");
+    if (this.checked) {
+        console.log('Checkbox is checked!');
+        } else {
+        console.log('Checkbox is unchecked!');
+    }
 }
 document
   .getElementById("customize-font-toggle")
   .addEventListener("change", onChangeCustomizeFont);
 
 function onChangeSummary() {
-  getSummary();
-  console.log("clicked summary");
+  if (this.checked) {
+    console.log("Clicked summary");
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: generateSummary,
+      });
+    });
+  } else {
+    console.log("Unchecked the summary option!");
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: removeSummarySection,
+      });
+    });
+  }
 }
 document
   .getElementById("summary-toggle")

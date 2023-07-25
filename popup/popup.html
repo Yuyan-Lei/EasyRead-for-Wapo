@@ -5,22 +5,33 @@
   </head>
 
   <body>
-    <h2>Select Target Language:</h2>
-    <select id="targetLanguage">
-      <option value="es">Spanish</option>
-      <option value="cn">Mandarin</option>
-    </select>
-    <button id="translate-option">Translate Page</button>
-    <button id="simple-version-option">Simple English</button>
-
-    <input id="customize-font-toggle" type="checkbox" />
-    <label for="customize-font-toggle">Customize Font</label>
-
-    <input id="summary-toggle" type="checkbox" />
-    <label for="summary-toggle">Summary</label>
-
-    <script src="popup.js" type="module"></script>
-    <script src="api/openAI.js"></script>
-    <script src="handlers/summary.js"></script>
+    <div class="popup-window">
+      <div class="popup-title">EasyRead for WaPo</div>
+      <div class="popup-options-container">
+        <div class="form-check form-switch">
+          <label for="translate-toggle" class="form-check-label small">Translate Articles</label>
+          <input id="translate-toggle" type="checkbox" class="form-check-input" role="switch">
+          <select class="form-select" id="targetLanguage">
+            <option value="cn" selected>Mandarin</option>
+            <option value="es">Spanish</option>
+          </select>
+        </div>
+    
+        <div class="form-check form-switch">
+          <label for="simple-version-toggle" class="form-check-label small">Show Simpler Version</label>
+          <input id="simple-version-toggle" type="checkbox" class="form-check-input" role="switch">
+        </div>
+    
+        <div class="form-check form-switch">
+          <label for="customize-font-toggle" class="form-check-label small">Customize Font</label>
+          <input id="customize-font-toggle" type="checkbox" class="form-check-input" role="switch">
+        </div>
+    
+        <div class="form-check form-switch">
+          <label for="summary-toggle" class="form-check-label small">Show Summary</label>
+          <input id="summary-toggle" type="checkbox" class="form-check-input" role="switch">
+        </div>
+      </div>
+    </div>  
   </body>
 </html>
