@@ -2,7 +2,6 @@ export function translateArticleBody(targetLanguage) {
   console.log('translateArticleBody() called');
   console.log('targetLanguage: ' + targetLanguage);
 
-  // For main article body
   const articleBodies = document.getElementsByClassName('article-body');
   const articleCount = articleBodies.length;
 

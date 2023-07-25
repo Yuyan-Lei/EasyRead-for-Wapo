@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>NewsFlex for WaPo</title>
+    <script src="popup.js" type="module"></script>
   </head>
 
   <body>
@@ -10,21 +11,16 @@
       <option value="es">Spanish</option>
       <option value="cn">Mandarin</option>
     </select>
-    <button id="translate-option">Translate Page</button>
-    <button id="simple-version-option">Simple English</button>
+    <input id="translate-toggle" type="checkbox" />
+    <label for="translate-toggle">Translate Articles</label>
+
+    <input id="simple-version-toggle" type="checkbox" />
+    <label for="simple-version-toggle">Show Simpler Version</label>
 
     <input id="customize-font-toggle" type="checkbox" />
     <label for="customize-font-toggle">Customize Font</label>
 
     <input id="summary-toggle" type="checkbox" />
-    <label for="summary-toggle">Summary</label>
-
-    <script src="popup.js" type="module"></script>
-    <script src="api/openAI.js"></script>
-    <script>
-      var summaryGenerator = new SummaryGenerator();
-      var text = summaryGenerator.getSummary();
-      console.log(text);
-    </script>
+    <label for="summary-toggle">Show Summary</label>
   </body>
 </html>
