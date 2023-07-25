@@ -21,9 +21,17 @@ export function translateArticleBody(targetLanguage) {
       // translationParagraph.style.fontSize = '16px';
       translationParagraph.style.color = 'gray';
       translationParagraph.innerHTML = translation;
+      translationParagraph.id = 'translation-section';
 
       // insert the translation after the original paragraph
       paragraphs[j].appendChild(translationParagraph);    
     }
   }
+}
+
+export function removeTranslation() {
+  const translationParagraphs = document.querySelectorAll('#translation-section');
+  translationParagraphs.forEach((paragraph) => {
+    paragraph.remove();
+  });
 }

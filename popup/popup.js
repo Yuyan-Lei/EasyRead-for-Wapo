@@ -1,6 +1,6 @@
-import { translateArticleBody } from '../handlers/translationHandler.js';
+import { translateArticleBody, removeTranslation } from '../handlers/translationHandler.js';
 import { simplifyArticleBody } from '../handlers/simplificationHandler.js';
-import { generateSummary } from '../handlers/summaryHandler.js';
+import { generateSummary, removeSummarySection } from '../handlers/summaryHandler.js';
 
 function onClickTranslate () {
     if (this.checked) {
@@ -8,7 +8,6 @@ function onClickTranslate () {
         let targetLanguage = document.getElementById('targetLanguage').value;
         console.log(`targetLanguage: ${targetLanguage}`);
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            console.log(tabs);
             chrome.scripting.executeScript({
                 target: { tabId: tabs[0].id },
                 func: translateArticleBody,
@@ -17,6 +16,12 @@ function onClickTranslate () {
         });
     } else {
         console.log('Unchecked the translate option!');
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: removeTranslation
+            })
+        });
     }
 }
 document.getElementById("translate-toggle").addEventListener("change", onClickTranslate);
@@ -26,7 +31,6 @@ function onClickSimpleEnglish() {
     if (this.checked) {
         console.log("clicked the simple version option");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            console.log(tabs);
             chrome.scripting.executeScript({
                 target: { tabId: tabs[0].id },
                 func: simplifyArticleBody
@@ -53,7 +57,6 @@ function onChangeSummary () {
     if (this.checked) {
         console.log("Clicked summary");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            console.log(tabs);
             chrome.scripting.executeScript({
                 target: { tabId: tabs[0].id },
                 func: generateSummary
@@ -61,6 +64,12 @@ function onChangeSummary () {
         });
     } else {
         console.log('Unchecked the summary option!');
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: removeSummarySection
+            })
+        });
     }
 }
 document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
