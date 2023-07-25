@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EasyRead for WaPo</title>
-    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="popup.css" />
     <script src="popup.js" type="module"></script>
+    <script
+      type="text/javascript"
+      src="/scripts/chrome-extension-async.js"
+    ></script>
   </head>
 
   <body>
@@ -14,29 +18,57 @@
       <div class="popup-title">EasyRead for WaPo</div>
       <div class="popup-options-container">
         <div class="form-check form-switch">
-          <label for="translate-toggle" class="form-check-label small">Translate Articles</label>
-          <input id="translate-toggle" type="checkbox" class="form-check-input" role="switch">
+          <label for="translate-toggle" class="form-check-label small"
+            >Translate Articles</label
+          >
+          <input
+            id="translate-toggle"
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+          />
           <select class="form-select" id="targetLanguage">
             <option value="cn" selected>Mandarin</option>
             <option value="es">Spanish</option>
           </select>
         </div>
-    
+
         <div class="form-check form-switch">
-          <label for="simple-version-toggle" class="form-check-label small">Show Simpler Version</label>
-          <input id="simple-version-toggle" type="checkbox" class="form-check-input" role="switch">
+          <label for="simple-version-toggle" class="form-check-label small"
+            >Show Simpler Version</label
+          >
+          <input
+            id="simple-version-toggle"
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+          />
         </div>
-    
+
         <div class="form-check form-switch">
-          <label for="customize-font-toggle" class="form-check-label small">Customize Font</label>
-          <input id="customize-font-toggle" type="checkbox" class="form-check-input" role="switch">
+          <label for="customize-font-toggle" class="form-check-label small"
+            >Customize Font</label
+          >
+          <input
+            id="customize-font-toggle"
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+          />
         </div>
-    
+
         <div class="form-check form-switch">
-          <label for="summary-toggle" class="form-check-label small">Show Summary</label>
-          <input id="summary-toggle" type="checkbox" class="form-check-input" role="switch">
+          <label for="summary-toggle" class="form-check-label small"
+            >Show Summary</label
+          >
+          <input
+            id="summary-toggle"
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+          />
         </div>
       </div>
-    </div>  
+    </div>
   </body>
 </html>

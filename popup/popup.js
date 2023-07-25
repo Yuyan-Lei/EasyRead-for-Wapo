@@ -62,14 +62,19 @@ document
   .getElementById("customize-font-toggle")
   .addEventListener("change", onChangeCustomizeFont);
 
-function onChangeSummary() {
+async function onChangeSummary() {
   if (this.checked) {
+    // generateSummary();
     console.log("Clicked summary");
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        files: ["../handlers/summaryHandler.js"],
-      });
+      chrome.scripting
+        .executeScript({
+          target: { tabId: tabs[0].id },
+          //   files: ["./handlers/summaryHandler.js"],
+          //   args: [this.checked],
+          func: generateSummary,
+        })
+        .then((result) => console.log(result));
     });
   } else {
     console.log("Unchecked the summary option!");

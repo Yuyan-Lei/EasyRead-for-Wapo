@@ -20,6 +20,7 @@ async function sendRequest(requestData) {
 }
 
 export async function getSummaryRequest(text, length) {
+  console.log("hello");
   console.log(text, length);
   const requestData = {
     model: "gpt-3.5-turbo",
