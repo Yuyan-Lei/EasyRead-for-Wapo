@@ -1,41 +1,35 @@
-class GPTInterface {
-  constructor() {
-    this.api = new XMLHttpRequest();
-    this.api.setRequestHeader(
-      "Authorization",
-      "Bearer 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"
-    );
-    this.api.open("get", "https://api.openai.com/v1/chat/completions");
-  }
+async function getApiKey() {
+  const response = await fetch("../env/apiKey.json");
+  const apiKey = await response.json();
+  return apiKey.openAIApiKey;
 }
 
-// TODO: other classes implemented here
-class SummaryGenerator extends GPTInterface {
-  constructor() {
-    super();
-  }
+async function sendRequest(requestData) {
+  const apiKey = await getApiKey();
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify(requestData),
+  });
+  const data = await response.json();
+  console.log(data);
+  return data.choices[0].message.content;
+}
 
-  getSummary(text, length) {
-    const urlParams = URLSearchParams({
-      model: "gpt-4",
-      messages: [
-        { role: "system", content: "You are a news article summary generator" },
-        {
-          role: "user",
-          content: `In ${length} words, accurately summarize this article: ${text}`,
-        },
-      ],
-      temperature: 0.2,
-    });
-    this.api.send(urlParams);
-    this.api.onload = function () {
-      if (this.status === 200) {
-        console.log(this.response);
-        return this.response;
-      } else {
-        console.error("Request failed!", this.status, this.response);
-        return this.status;
-      }
-    };
-  }
+export async function getSummaryRequest(text, length) {
+  const requestData = {
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "system", content: "You are a news article summary generator" },
+      {
+        role: "user",
+        content: `In ${length} words, accurately summarize this article: ${text}`,
+      },
+    ],
+    temperature: 0.2,
+  };
+  return await sendRequest(requestData);
 }
