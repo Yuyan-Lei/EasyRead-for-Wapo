@@ -13,8 +13,7 @@ export async function generateSummary() {
   );
 
   // get summary from API
-  // var summaryGenerator = new SummaryGenerator();
-  // var text = summaryGenerator.getSummary();
+
   // console.log(text);
 
   // Generate a summary
