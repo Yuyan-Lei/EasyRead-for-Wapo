@@ -29,7 +29,7 @@ export async function getSummaryRequest(text, length) {
         content: `In ${length} words, accurately summarize this article: ${text}`,
       },
     ],
-    temperature: 0.2,
+    temperature: 1,
   };
   return await sendRequest(requestData);
 }
