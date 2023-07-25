@@ -7,8 +7,7 @@
     "tabs",
     "activeTab",
     "scripting",
-    "storage",
-    "https://api.openai.com/v1//chat/completions"
+    "storage"
   ],
   "host_permissions": ["http://*/*", "https://*/*"],
   "action": {
