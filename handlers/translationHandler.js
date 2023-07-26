@@ -1,6 +1,6 @@
-export function translateArticleBody(targetLanguage) {
-  console.log('translateArticleBody() called');
-  console.log('targetLanguage: ' + targetLanguage);
+export function translateArticleBody(targetLanguage, color, style) {
+  const style = 'none';
+  const color = 'grey';
 
   const articleBodies = document.getElementsByClassName('article-body');
   const articleCount = articleBodies.length;
@@ -17,11 +17,57 @@ export function translateArticleBody(targetLanguage) {
 
       // create a styled div to hold the translation
       let translationParagraph = document.createElement('p');
-      // translationParagraph.style.fontStyle = 'italic';
-      // translationParagraph.style.fontSize = '16px';
-      translationParagraph.style.color = 'gray';
       translationParagraph.innerHTML = translation;
       translationParagraph.id = 'translation-section';
+
+      // Display style options:
+      switch (style) {
+        case 'none':
+          break;
+        case 'italic':
+          translationParagraph.style.fontStyle = 'italic';          
+          break;
+        case 'bold':
+          translationParagraph.style.fontWeight = 'bold';          
+          break;
+        case 'underlined':
+          translationParagraph.style.textDecorationLine = 'underline'; 
+          translationParagraph.style.textDecorationColor = '#018abe';          
+          break;
+        case 'dashed-underlined':
+          translationParagraph.style.textDecorationLine = 'underline';          
+          translationParagraph.style.textDecorationColor = '#018abe'; 
+          translationParagraph.style.textDecorationStyle = 'dashed';          
+          break;
+        case 'highlighted':
+          translationParagraph.style.backgroundColor = 'yellow';         
+          break;
+        default:
+          break;
+      }
+
+      // Display color options:
+      switch (color) {
+        case 'none':      
+          break;
+        case 'grey':
+          translationParagraph.style.color = 'grey';        
+          break;
+        case 'blue':
+          translationParagraph.style.color = '#018abe';        
+          break;
+        case 'orange':
+          translationParagraph.style.color = 'orange';        
+          break;
+        case 'red':
+          translationParagraph.style.color = 'red';        
+          break;
+        case 'green':
+          translationParagraph.style.color = 'green';        
+          break;
+        default:
+          break;
+      }
 
       // insert the translation after the original paragraph
       paragraphs[j].appendChild(translationParagraph);    
