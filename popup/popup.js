@@ -2,7 +2,6 @@ import {
   translateArticleBody,
   removeTranslation,
 } from "../handlers/translationHandler.js";
-import { simplifyArticleBody } from "../handlers/simplificationHandler.js";
 
 function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT') {
@@ -119,17 +118,6 @@ document
 
 function onClickSimpleEnglish() {
     updateSwitchStatus(this);
-    if (this.checked) {
-        console.log("clicked the simple version option");
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                func: simplifyArticleBody
-            })
-        });
-    } else {
-        console.log("unchecked the simple version option");
-    }
 }
 document
   .getElementById("simple-version-toggle")

@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.washingtonpost.com/*"],
-      "js": ["scripts/summary.js"]
+      "js": ["scripts/simplification.js"]
     }
   ]
 }
