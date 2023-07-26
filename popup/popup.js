@@ -2,7 +2,94 @@ import { translateArticleBody, removeTranslation } from '../handlers/translation
 import { simplifyArticleBody } from '../handlers/simplificationHandler.js';
 import { generateSummary, removeSummarySection } from '../handlers/summaryHandler.js';
 
-function onClickTranslate () {
+function setSwitchDisableStatus(element, status) {
+    if (!status && element.nodeName === 'INPUT') {
+        element.checked = false;
+        currentSwitchStatus[element.id] = false;
+        updateSwitchStatus(element);
+    }
+    element.disabled = !status;
+}
+
+const elements = [
+    // switch
+    document.getElementById("translate-toggle"),
+    document.getElementById("simple-version-toggle"),
+    document.getElementById("customize-font-toggle"),
+    document.getElementById("summary-toggle"),
+
+    // select
+    document.getElementById("targetLanguage"),
+    document.getElementById("targetFont"),
+];
+
+let currentSwitchStatus = {
+    "turn-on-toggle": false,
+    'translate-toggle': false,
+    'simple-version-toggle': false,
+    'customize-font-toggle': false,
+    'summary-toggle': false,
+    'targetLanguage': 'cn',
+    'targetFont': 'Arial',
+}
+
+window.onload = () => {
+    chrome.storage.sync.get(['extensionSwitchs'], function (result) {
+        console.log('onload: Value currently is ' + result.extensionSwitchs);
+        console.log(result)
+        if (result.extensionSwitchs) {
+            currentSwitchStatus = result.extensionSwitchs;
+            document.getElementById("turn-on-toggle").checked = currentSwitchStatus["turn-on-toggle"];
+            if (currentSwitchStatus["turn-on-toggle"]) {
+                elements.forEach(e => setSwitchDisableStatus(e, true));
+            }
+            elements.forEach(e => {
+                if (e.nodeName === 'INPUT') {
+                    e.checked = currentSwitchStatus[e.id];
+                }
+                else if (e.nodeName === 'SELECT') {
+                    e.value = currentSwitchStatus[e.id];
+                }
+            });
+
+        }
+
+        else {
+            chrome.storage.sync.set({ extensionSwitchs: currentSwitchStatus }, function () {
+                console.log('first time onload: Value is set to ' + currentSwitchStatus);
+            });
+        }
+    });
+}
+
+function updateSwitchStatus(element) {
+    console.log(element.checked);
+    element.nodeName === "INPUT" ?
+        currentSwitchStatus[element.id] = element.checked :
+        currentSwitchStatus[element.id] = element.value;
+    console.log(`updateSwitchStatus: ${currentSwitchStatus}`)
+    chrome.storage.sync.set({ extensionSwitchs: currentSwitchStatus }, function () {
+        console.log(currentSwitchStatus);
+    });
+}
+
+
+function enableExtension() {
+    updateSwitchStatus(this);
+    if (this.checked) {
+        console.log("Checked the turn on option!");
+        elements.forEach(e => setSwitchDisableStatus(e, true));
+    } else {
+        console.log("Unchecked the turn on option!");
+        elements.forEach(e => setSwitchDisableStatus(e, false));
+    }
+
+}
+document.getElementById("turn-on-toggle").addEventListener("click", enableExtension);
+
+
+function onClickTranslate() {
+    updateSwitchStatus(this);
     if (this.checked) {
         console.log("Checked translate");
         let targetLanguage = document.getElementById('targetLanguage').value;
@@ -28,6 +115,7 @@ document.getElementById("translate-toggle").addEventListener("change", onClickTr
 
 
 function onClickSimpleEnglish() {
+    updateSwitchStatus(this);
     if (this.checked) {
         console.log("clicked the simple version option");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -44,16 +132,18 @@ document.getElementById("simple-version-toggle").addEventListener("change", onCl
 
 
 function onChangeCustomizeFont() {
+    updateSwitchStatus(this);
     if (this.checked) {
         console.log('Checkbox is checked!');
-        } else {
+    } else {
         console.log('Checkbox is unchecked!');
     }
 }
 document.getElementById("customize-font-toggle").addEventListener("change", onChangeCustomizeFont);
 
 
-function onChangeSummary () {
+function onChangeSummary() {
+    updateSwitchStatus(this);
     if (this.checked) {
         console.log("Clicked summary");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -73,3 +163,15 @@ function onChangeSummary () {
     }
 }
 document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
+
+function onChangeTargetLanguage() {
+    updateSwitchStatus(this);
+    console.log(this.value);
+}
+document.getElementById("targetLanguage").addEventListener("change", onChangeTargetLanguage);
+
+function onChangeTargetFont() {
+    updateSwitchStatus(this);
+    console.log(this.value);
+}
+document.getElementById("targetFont").addEventListener("change", onChangeTargetFont);
