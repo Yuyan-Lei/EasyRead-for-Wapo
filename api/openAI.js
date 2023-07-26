@@ -12,12 +12,7 @@ export async function sendRequest(requestData) {
   return data.choices[0].message.content;
 }
 
-export async function getSummaryRequest(length) {
-  // extract the article body
-  const articleBodies = document.querySelectorAll(
-    'p[data-testid="drop-cap-letter"]'
-  );
-
+export async function getSummaryRequest(length, articleBodies) {
   let text = "";
   for (let i = 0; i < articleBodies.length; i++) {
     if (text.length < 12000) text += articleBodies[i].textContent;

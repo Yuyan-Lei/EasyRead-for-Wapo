@@ -157,8 +157,13 @@
         }
 
         // get summary from API
+          // extract the article body
+        const articleBodies = document.querySelectorAll(
+            'p[data-testid="drop-cap-letter"]'
+        );
         const shortSummaryText = await chrome.runtime.sendMessage({
-            action: 'getSummary'
+            action: 'getSummary',
+            articleBodies: articleBodies
         });
         console.log(shortSummaryText);
         const longSummaryText = `This is a long summary.

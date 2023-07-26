@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
   if (message.action === "getSummary") {
-    const result = await getSummaryRequest(100);
+    const result = await getSummaryRequest(100, message.articleBodies);
     sendResponse(result);
   }
 });
