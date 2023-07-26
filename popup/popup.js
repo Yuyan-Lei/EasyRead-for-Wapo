@@ -1,7 +1,13 @@
-import { translateArticleBody, removeTranslation } from '../handlers/translationHandler.js';
-import { simplifyArticleBody } from '../handlers/simplificationHandler.js';
-import { generateSummary, removeSummarySection } from '../handlers/summaryHandler.js';
-import { getSummaryRequest } from '../api/openAI.js';
+import {
+  translateArticleBody,
+  removeTranslation,
+} from "../handlers/translationHandler.js";
+import { simplifyArticleBody } from "../handlers/simplificationHandler.js";
+import {
+  generateSummary,
+  removeSummarySection,
+} from "../handlers/summaryHandler.js";
+import { getSummaryRequest } from "../api/openAI.js";
 
 function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT') {
@@ -112,8 +118,9 @@ function onClickTranslate() {
         });
     }
 }
-document.getElementById("translate-toggle").addEventListener("change", onClickTranslate);
-
+document
+  .getElementById("translate-toggle")
+  .addEventListener("change", onClickTranslate);
 
 function onClickSimpleEnglish() {
     updateSwitchStatus(this);
@@ -129,8 +136,9 @@ function onClickSimpleEnglish() {
         console.log("unchecked the simple version option");
     }
 }
-document.getElementById("simple-version-toggle").addEventListener("change", onClickSimpleEnglish);
-
+document
+  .getElementById("simple-version-toggle")
+  .addEventListener("change", onClickSimpleEnglish);
 
 function onChangeCustomizeFont() {
     updateSwitchStatus(this);
@@ -140,7 +148,9 @@ function onChangeCustomizeFont() {
         console.log('Checkbox is unchecked!');
     }
 }
-document.getElementById("customize-font-toggle").addEventListener("change", onChangeCustomizeFont);
+document
+  .getElementById("customize-font-toggle")
+  .addEventListener("change", onChangeCustomizeFont);
 
 
 function onChangeSummary() {
@@ -148,11 +158,24 @@ function onChangeSummary() {
     if (this.checked) {
         console.log("Clicked summary");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
+            chrome.scripting
+              .executeScript({
                 target: { tabId: tabs[0].id },
-                func: generateSummary
-            })
-        });
+                func: getSummaryRequest,
+                args: [100],
+                // func: function() {
+                //     chrome.tabs.executeScript({target: {tabId: tabs[0].id}, func: generateSummary})
+                // },
+              })
+              .then((res) => {
+                console.log(res[0].result);
+                chrome.scripting.executeScript({
+                  target: { tabId: tabs[0].id },
+                  func: generateSummary,
+                  args: [res[0].result],
+                });
+              });
+            });
     } else {
         console.log('Unchecked the summary option!');
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -163,20 +186,7 @@ function onChangeSummary() {
         });
     }
 }
-
-document.getElementById("summary-toggle").addEventListener("change", test);
-
-function test() {
-    console.log("test");
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        func: getSummaryRequest,
-        args: ["hello", 5]
-    })
-        .then(result => console.log(result));
-    });
-}
+document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
 
 function onChangeTargetLanguage() {
     updateSwitchStatus(this);

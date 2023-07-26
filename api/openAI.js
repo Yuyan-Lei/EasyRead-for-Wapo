@@ -15,9 +15,19 @@
 //   return data.choices[0].message.content;
 // }
 
-export async function getSummaryRequest(text, length) {
+export async function getSummaryRequest(length) {
+  // extract the article body
+  const articleBodies = document.querySelectorAll(
+    'p[data-testid="drop-cap-letter"]'
+  );
+
+  let text = "";
+  for (let i = 0; i < articleBodies.length; i++) {
+    if (text.length < 12000) text += articleBodies[i].textContent;
+  }
+  console.log(text.length);
   console.log("run getSummaryRequest() now");
-  console.log(text, length);
+  console.log(articleBodies, length);
   const requestData = {
     model: "gpt-3.5-turbo",
     messages: [
@@ -29,9 +39,8 @@ export async function getSummaryRequest(text, length) {
     ],
     temperature: 1,
   };
-  
-  const apiKey = "API_KEY_GOES_HERE"; // ADD YOUR API KEY HERE
-  console.log(apiKey);
+
+  const apiKey = "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"; // ADD YOUR API KEY HERE
   const data = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -39,8 +48,31 @@ export async function getSummaryRequest(text, length) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify(requestData),
-  })
-  .then (response => response.json());
+  }).then((response) => response.json());
   console.log(data);
   return data.choices[0].message.content;
+}
+
+export async function getSimplifyRequest() {
+  // extract the article body
+  const articleBodies = document.querySelectorAll(
+    'p[data-testid="drop-cap-letter"]'
+  );
+
+  let text = "";
+  for (let i = 0; i < articleBodies.length; i++) {
+    if (text.length < 12000) text += articleBodies[i].textContent;
+  }
+
+  const requestData = {
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "system", content: "You are a news article summary generator" },
+      {
+        role: "user",
+        content: `In ${length} words, accurately summarize this article: ${text}`,
+      },
+    ],
+    temperature: 1,
+  };
 }
