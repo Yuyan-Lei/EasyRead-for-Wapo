@@ -1,41 +1,46 @@
-// export function generateSummary(generatedText) {
-//   console.log(generatedText);
-//   // get summary from API
-//   const shortSummaryText = generatedText;
-//   const longSummaryText = `This is a long summary.
-//         This is a long summary.
-//         This is a long summary.
-//         This is a long summary.
-//         This is a long summary.
-//         This is a long summary.`;
-//   const shortSectionNode = document.getElementById("short-summary-section");
-//   shortSectionNode.innerText = shortSummaryText;
-//   const longSectionNode = document.getElementById("long-summary-section");
-//   longSectionNode.innerText = longSummaryText;
-// }
+import { OPEN_AI_KEY } from "../apiKey.js";
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    console.log("Listener called");
+    console.log(message.articleBodies)
+    if (message.action === "getSummary") {
+        getSummaryRequest(message.length, message.articleBodies).then((result) => {
+            sendResponse({ result: result });
+        });
+        return true;
+    }
+});
 
-
-export async function getSummaryRequest(length) {
-  // extract the article body
-  const articleBodies = document.querySelectorAll(
-    'p[data-testid="drop-cap-letter"]'
-  );
-
-  let text = "";
-  for (let i = 0; i < articleBodies.length; i++) {
-    if (text.length < 12000) text += articleBodies[i].textContent;
-  }
-  console.log(text.length);
-  console.log("run getSummaryRequest() now");
-  const requestData = {
-    model: "gpt-3.5-turbo",
-    messages: [
-      { role: "system", content: "You are a news article summary generator" },
-      {
-        role: "user",
-        content: `In ${length} words, accurately summarize this article: ${text}`,
+async function sendRequest(requestData) {
+    const apiKey = OPEN_AI_KEY;
+    const data = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
-    ],
-    temperature: 1,
-  };
+      body: JSON.stringify(requestData),
+    }).then((response) => response.json());
+    return data.choices[0].message.content;
+}
+  
+async function getSummaryRequest(length, articleBodies) {
+    console.log(articleBodies);
+    let text = "";
+    for (let i = 0; i < articleBodies.length; i++) {
+      if (text.length < 12000) text += articleBodies[i].innerText;
+    }
+    console.log("run API now");
+    const requestData = {
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: "You are a news article summary generator" },
+        {
+          role: "user",
+          content: `In ${length} words, accurately summarize this article: ${text}`,
+        },
+      ],
+      temperature: 1,
+    };
+  
+    return sendRequest(requestData);
 }

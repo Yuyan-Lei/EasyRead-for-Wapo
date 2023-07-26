@@ -156,28 +156,32 @@
         console.log("Cannot find a valid article body");
         }
 
-        // get summary from API
-          // extract the article body
+        
+        // extract the article body
         const articleBodies = document.querySelectorAll(
             'p[data-testid="drop-cap-letter"]'
         );
-        const shortSummaryText = await chrome.runtime.sendMessage({
+
+        // get summary from API
+        const shortSummaryResponse = await chrome.runtime.sendMessage({
             action: 'getSummary',
-            articleBodies: articleBodies
-        });
-        console.log(shortSummaryText);
-        const longSummaryText = `This is a long summary.
-              This is a long summary.
-              This is a long summary.
-              This is a long summary.
-              This is a long summary.
-              This is a long summary.`;
-        
+            articleBodies: articleBodies,
+            length: 100,
+        })
+        const shortSummaryText = shortSummaryResponse.result;
+        const longSummaryResponse = await chrome.runtime.sendMessage({
+            action: 'getSummary',
+            articleBodies: articleBodies,
+            length: 200,
+        })
+        const longSummaryText = longSummaryResponse.result;
+
         // insert nodes
         const shortSectionNode = document.getElementById("short-summary-section");
         shortSectionNode.innerText = shortSummaryText;
         const longSectionNode = document.getElementById("long-summary-section");
         longSectionNode.innerText = longSummaryText;
+        
     } else {
         // remove the summary sections
         const shortContainer = document.getElementById("short-summary-container");

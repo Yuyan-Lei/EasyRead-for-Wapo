@@ -1,5 +1,5 @@
 export async function sendRequest(requestData) {
-  const apiKey = "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"; // ADD YOUR API KEY HERE
+  const apiKey = "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"; // ADD YOUR API KEY HERE
   const data = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {

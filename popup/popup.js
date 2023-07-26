@@ -3,12 +3,6 @@ import {
   removeTranslation,
 } from "../handlers/translationHandler.js";
 import { simplifyArticleBody } from "../handlers/simplificationHandler.js";
-import {
-  generateSummary,
-  removeSummarySection,
-  setSummarySections
-} from "../handlers/summaryHandler.js";
-import { getSummaryRequest } from "../api/openAI.js";
 
 function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT') {
