@@ -158,11 +158,24 @@ function onChangeSummary() {
     if (this.checked) {
         console.log("Clicked summary");
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
+            chrome.scripting
+              .executeScript({
                 target: { tabId: tabs[0].id },
-                func: generateSummary
-            })
-        });
+                func: getSummaryRequest,
+                args: [100],
+                // func: function() {
+                //     chrome.tabs.executeScript({target: {tabId: tabs[0].id}, func: generateSummary})
+                // },
+              })
+              .then((res) => {
+                console.log(res[0].result);
+                chrome.scripting.executeScript({
+                  target: { tabId: tabs[0].id },
+                  func: generateSummary,
+                  args: [res[0].result],
+                });
+              });
+            });
     } else {
         console.log('Unchecked the summary option!');
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -173,31 +186,7 @@ function onChangeSummary() {
         });
     }
 }
-
-document.getElementById("summary-toggle").addEventListener("change", test);
-
-function test() {
-    console.log("test");
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.scripting
-        .executeScript({
-          target: { tabId: tabs[0].id },
-          func: getSummaryRequest,
-          args: [100],
-          // func: function() {
-          //     chrome.tabs.executeScript({target: {tabId: tabs[0].id}, func: generateSummary})
-          // },
-        })
-        .then((res) => {
-          console.log(res[0].result);
-          chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: generateSummary,
-            args: [res[0].result],
-          });
-        });
-    });
-}
+document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
 
 function onChangeTargetLanguage() {
     updateSwitchStatus(this);
