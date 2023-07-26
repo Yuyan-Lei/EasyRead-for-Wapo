@@ -6,6 +6,7 @@ import { simplifyArticleBody } from "../handlers/simplificationHandler.js";
 import {
   generateSummary,
   removeSummarySection,
+  setSummarySections
 } from "../handlers/summaryHandler.js";
 import { getSummaryRequest } from "../api/openAI.js";
 
@@ -157,33 +158,8 @@ function onChangeSummary() {
     updateSwitchStatus(this);
     if (this.checked) {
         console.log("Clicked summary");
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting
-              .executeScript({
-                target: { tabId: tabs[0].id },
-                func: getSummaryRequest,
-                args: [100],
-                // func: function() {
-                //     chrome.tabs.executeScript({target: {tabId: tabs[0].id}, func: generateSummary})
-                // },
-              })
-              .then((res) => {
-                console.log(res[0].result);
-                chrome.scripting.executeScript({
-                  target: { tabId: tabs[0].id },
-                  func: generateSummary,
-                  args: [res[0].result],
-                });
-              });
-            });
     } else {
         console.log('Unchecked the summary option!');
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                func: removeSummarySection
-            })
-        });
     }
 }
 document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
