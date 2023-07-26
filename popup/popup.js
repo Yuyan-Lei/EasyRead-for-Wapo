@@ -1,6 +1,7 @@
 import { translateArticleBody, removeTranslation } from '../handlers/translationHandler.js';
 import { simplifyArticleBody } from '../handlers/simplificationHandler.js';
 import { generateSummary, removeSummarySection } from '../handlers/summaryHandler.js';
+import { getSummaryRequest } from '../api/openAI.js';
 
 function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT') {
@@ -162,7 +163,20 @@ function onChangeSummary() {
         });
     }
 }
-document.getElementById("summary-toggle").addEventListener("change", onChangeSummary);
+
+document.getElementById("summary-toggle").addEventListener("change", test);
+
+function test() {
+    console.log("test");
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: getSummaryRequest,
+        args: ["hello", 5]
+    })
+        .then(result => console.log(result));
+    });
+}
 
 function onChangeTargetLanguage() {
     updateSwitchStatus(this);
