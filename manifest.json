@@ -19,6 +19,13 @@
     "48": "/images/favicon/favicon-48x48.png"
   },
   "background": {
-    "service_worker": "scripts/background.js"
-  }
+    "service_worker": "scripts/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.washingtonpost.com/*"],
+      "js": ["scripts/content.js"]
+    }
+  ]
 }
