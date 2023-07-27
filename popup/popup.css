@@ -14,6 +14,13 @@ body {
   padding-bottom: 16px;
 }
 
+a {
+  color: black;
+  transition: 0.3s;
+}
+a:hover {
+  color: grey;
+}
 .popup-bottom {
   margin-top: 6px;
   margin-right: 4px;
@@ -21,9 +28,12 @@ body {
   flex-direction: column;
   justify-content: flex-end;
 }
-.settings-button{
+.settings-button {
   margin-left: auto;
   width: fit-content;
+}
+.settings-button a {
+  text-decoration: none;
 }
 .settings-label {
   font-size: 12px;
@@ -46,7 +56,7 @@ body {
 
 hr {
   margin: 0 0;
-  color: rgb(200 200 190)
+  color: rgb(200 200 190);
 }
 
 .popup-options {
@@ -78,16 +88,18 @@ hr {
   height: 24px;
   width: 48px;
   border-radius: 3rem;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .enable-switch input:checked {
-  background-color: #1976D2;
-  border-color: #1976D2;
+  background-color: #1976d2;
+  border-color: #1976d2;
 }
 
-.popup-options input:checked{
-  background-color: #42A5F5;
-  border-color: #42A5F5;
+.popup-options input:checked {
+  background-color: #42a5f5;
+  border-color: #42a5f5;
 }
 
 .form-select {
