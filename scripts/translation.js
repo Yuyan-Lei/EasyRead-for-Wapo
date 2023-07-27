@@ -76,11 +76,12 @@
     }
 
     async function processDropCapLetter(node) {
-        // build a new node
-        const newNode= processNewNode(node, 'beforeend');
-        
         let translation = '';
         let paragraphText = node.innerHTML;
+
+        // build a new node
+        let newNode = buildNode(false);
+        node.insertAdjacentElement('beforeend', newNode);
 
         // remove bold tags
         const regexToRemoveBoldTag = /<b>\ <\/b>/g;
@@ -119,6 +120,7 @@
             }
         }
         newNode.innerHTML = translation;
+        console.log(newNode.innerHTML);
     }
 
     async function processInterstitialLink(node) {
