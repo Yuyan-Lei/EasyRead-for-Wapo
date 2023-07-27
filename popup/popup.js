@@ -1,8 +1,3 @@
-import {
-  translateArticleBody,
-  removeTranslation,
-} from "../handlers/translationHandler.js";
-
 function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT') {
         element.checked = false;
@@ -93,23 +88,8 @@ function onClickTranslate() {
     updateSwitchStatus(this);
     if (this.checked) {
         console.log("Checked translate");
-        let targetLanguage = document.getElementById('targetLanguage').value;
-        console.log(`targetLanguage: ${targetLanguage}`);
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                func: translateArticleBody,
-                args: [targetLanguage]
-            })
-        });
     } else {
         console.log('Unchecked the translate option!');
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                func: removeTranslation
-            })
-        });
     }
 }
 document
