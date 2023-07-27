@@ -137,4 +137,13 @@ hr {
   padding: 3px 8px;
   width: 80px;
   border-radius: 8px;
+  background-color: #222;
+}
+
+.form-subtitle {
+  font-size: 13px;
+  padding-left: 4px;
+  color: grey;
+  padding-bottom: 4px;
+  padding-top: 4px;
 }
