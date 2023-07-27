@@ -103,3 +103,19 @@ hr {
   background: none;
   border: none;
 }
+
+#reset-btn {
+  width: 50%;
+  margin-top: 10px;
+}
+
+#font-size {
+  display: inline-block;
+  width: 130px;
+  margin-right: 5px;
+}
+
+#font-size::-webkit-slider-runnable-track {
+  background-color: white;
+  border: 1px solid #aaa;
+}

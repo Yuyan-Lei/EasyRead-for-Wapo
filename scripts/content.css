@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "OpenDyslexic";
+    font-style: normal;
+    font-weight: normal;
+    src: url('chrome-extension://__MSG_@@extension_id__/library/assets/OpenDyslexic-Regular.otf');
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    font-style: normal;
+    font-weight: bold;
+    src: url('chrome-extension://__MSG_@@extension_id__/library/assets/OpenDyslexic-Bold.otf');
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    font-style: italic;
+    font-weight: normal;
+    src: url('chrome-extension://__MSG_@@extension_id__/library/assets/OpenDyslexic-Italic.otf');
+}
+
+@font-face {
+    font-family: "OpenDyslexic";
+    font-style: italic;
+    font-weight: bold;
+    src: url('chrome-extension://__MSG_@@extension_id__/library/assets/OpenDyslexic-BoldItalic.otf');
+}

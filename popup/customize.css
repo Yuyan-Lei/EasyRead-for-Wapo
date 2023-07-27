@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 410px;
+    min-height: 339px;
+    padding: 32px;
+    border: black 1px solid;
+    /* margin: 20px */
+  }

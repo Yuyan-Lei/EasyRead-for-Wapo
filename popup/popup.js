@@ -38,9 +38,6 @@ window.onload = () => {
             else if (e.id === 'targetLanguage') {
                 e.value = currSettings["translate"]['language'];
             }
-            else if (e.id === 'targetFont') {
-                e.value = currSettings["customize"]['font'];
-            }
         });
     });
 }
@@ -56,8 +53,6 @@ function updateSwitchStatus(element) {
         }
         else if (element.id === 'targetLanguage') {
             currSettings["translate"]['language'] = element.value;
-        }else {
-            currSettings["customize"]['font'] = element.value;
         }
         console.log(currSettings);
         return currSettings;
@@ -86,7 +81,6 @@ const defaultSettings = {
     },
     "customize": {
       "toggle": false,
-      "font": "Arial"
     },
     "simple": {
       "toggle": false,
@@ -106,8 +100,6 @@ function setBackToDefault() {
         } 
         else if (e.id === 'targetLanguage') {
             e.value = defaultSettings["translate"]['language'];
-        }else {
-            e.value = defaultSettings["customize"]['font'];
         }
     });
     chrome.storage.sync.set({ settings: defaultSettings })

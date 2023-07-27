@@ -16,7 +16,6 @@ chrome.runtime.onInstalled.addListener(function () {
     },
     "customize": {
       "toggle": false,
-      "font": "Arial"
     },
     "simple": {
       "toggle": false,
@@ -48,7 +47,6 @@ chrome.runtime.onStartup.addListener(() => {
         },
         "customize": {
           "toggle": false,
-          "font": "Arial"
         },
         "simple": {
           "toggle": false,
@@ -63,9 +61,13 @@ chrome.runtime.onStartup.addListener(() => {
       chrome.storage.sync.set({ settings: defaultSettings }); // initialize settings
     }
   });
-
 });
 
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-  chrome.tabs.reload();
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request === "getFontList") {
+    chrome.fontSettings.getFontList(fonts => sendResponse(fonts));
+  } else {
+    console.log(request);
+  }
+  return true;
 });
