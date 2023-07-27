@@ -5,7 +5,56 @@
         const style = result.settings['translate']['style'];
         const color = result.settings['translate']['color'];
         const targetLanguage = result.settings['translate']['language'];
+        
         if (mainSettings && on) {
+            // main function
+            const pElement = document.querySelector('p[data-testid="drop-cap-letter"]');
+            if (pElement) {
+                // A. article page
+                await traverseBodyNodes(document.body);
+            } else {
+                // B. home page
+                const homePageNode = document.querySelector('div.card-text');
+                if (homePageNode) {
+                    await traverseHomeNodes(document.body);
+                }
+            }
+
+            // Logic A: for homepage
+            async function traverseHomeNodes(node) {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.matches('div.card-text')) {
+                        await processHomePageNode(node);
+                    }
+                }
+                for (const childNode of node.childNodes) {
+                    traverseHomeNodes(childNode);
+                }
+            }
+            
+            // Logic B: for article pages
+            async function traverseBodyNodes(node) {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.matches('span[data-qa="headline-text"]')) {
+                        await processNewNode(node, 'afterend');
+                    } else if (node.matches('span[data-qa="headline-opinion-text"]')) {
+                        await processNewNode(node, 'afterend');
+                    } else if (node.matches('h2[data-qa="subheadline"]')) {
+                        await processNewNode(node, 'beforeend');
+                    } else if (node.matches ('figcaption')) {
+                        await processNewNode(node, 'beforeend');
+                    } else if (node.matches('p[data-testid="drop-cap-letter"]')) {
+                        await processDropCapLetter(node);
+                    } else if (node.matches('a[data-qa="interstitial-link"]')) {
+                        await processInterstitialLink(node);
+                    }
+                }
+                for (const childNode of node.childNodes) {
+                    traverseBodyNodes(childNode);
+                }
+            }
+
+            // helper functions
             function buildNode(isATag) {
                 let translationParagraph;
                 translationParagraph = document.createElement('p');
@@ -78,6 +127,21 @@
                 newNode.innerText = text;
             }
 
+            async function processHomePageNode(node) {
+                const newNode = buildNode(false);
+                node.insertAdjacentElement('afterend', newNode);
+                // translate text
+                const text = node.innerText;
+                const response = await chrome.runtime.sendMessage({
+                    action: 'getTranslation',
+                    text: text,
+                    targetLanguage: targetLanguage,
+                })
+                const translatedText = response.result;
+                newNode.innerText = translatedText;
+            }
+
+
             async function processDropCapLetter(node) {
                 let translation = '';
                 let paragraphText = node.innerHTML;
@@ -141,29 +205,6 @@
                 const translatedText = textResponse.result;
                 newNode.innerHTML = `<a href="${link}">${translatedText}</a>`;
             }
-
-            async function traverseBodyNodes(node) {
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.matches('span[data-qa="headline-text"]')) {
-                        await processNewNode(node, 'afterend');
-                    } else if (node.matches('span[data-qa="headline-opinion-text"]')) {
-                        await processNewNode(node, 'afterend');
-                    } else if (node.matches('h2[data-qa="subheadline"]')) {
-                        await processNewNode(node, 'beforeend');
-                    } else if (node.matches ('figcaption')) {
-                        await processNewNode(node, 'beforeend');
-                    } else if (node.matches('p[data-testid="drop-cap-letter"]')) {
-                        await processDropCapLetter(node);
-                    } else if (node.matches('a[data-qa="interstitial-link"]')) {
-                        await processInterstitialLink(node);
-                    }
-                }
-                for (const childNode of node.childNodes) {
-                    traverseBodyNodes(childNode);
-                }
-            }
-
-            await traverseBodyNodes(document.body);
         } else {
             // remove translation
             const translationParagraphs = document.querySelectorAll('#translation-section');
