@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EasyRead Options</title>
-    <script src="options.js"></script>
-    <link rel="stylesheet" href="options.css">
-    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css">
-</head>
-<body>
-    <div class="canvas">
-        <h1>EasyRead Options</h1>
-        <h1>EasyRead Options</h1>
-        <h1>EasyRead Options</h1>
+<html>
+  <head>
+    <title>EasyRead Settings</title>
+    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div
+      class="form-check form-switch form-switch-lg form-check-reverse popup-option enable-switch"
+    >
+      <label for="turn-on-toggle" class="form-check-label form-title"
+        >Settings</label
+      >
     </div>
-    <p>
-        options
-    </p>
-    
-</body>
+
+    <form class="optionsForm">
+      <div class="popup-option">
+        <label for="targetLanguage" class="form-check-label"
+          >Translation Language
+        </label>
+        <select
+          class="form-select form-select-sm"
+          id="targetLanguage"
+          name="targetLanguage"
+        >
+          <option value="es" selected>Spanish</option>
+          <option value="cn">Simplified Chinese</option>
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="popup-option">
+        <label for="simplifyAge" class="form-check-label"
+          >Target Reading Level (age)
+        </label>
+        <select
+          class="form-select form-select-sm"
+          id="simplifyAge"
+          name="simplifyAge"
+        >
+          <option value="10">6</option>
+          <option value="10">7</option>
+          <option value="10">8</option>
+          <option value="10">9</option>
+          <option value="10">10</option>
+          <option value="10">11</option>
+          <option value="10">12</option>
+          <option value="10">13</option>
+          <option value="10">14</option>
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="popup-option">
+        <label for="summaryLength" class="form-check-label"
+          >Smmary Length (words)
+        </label>
+        <select
+          class="form-select form-select-sm"
+          id="summaryLength"
+          name="summaryLength"
+        >
+          <option value="100">100</option>
+          <option value="200">200</option>
+        </select>
+      </div>
+      <hr />
+      <button id="submit-button" type="submit" class="btn btn-dark">
+        Submit
+      </button>
+    </form>
+    <div class="popup-bottom col g-0">
+      <button class="col-1 settings-button" type="button" id="setting">
+        <a href="../popup/popup.html">
+          <span class="settings-label">Home</span>
+        </a>
+      </button>
+    </div>
+    <script src="options.js"></script>
+  </body>
 </html>
