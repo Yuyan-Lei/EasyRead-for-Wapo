@@ -65,3 +65,7 @@ chrome.runtime.onStartup.addListener(() => {
   });
 
 });
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  chrome.tabs.reload();
+});
