@@ -80,7 +80,7 @@ const defaultSettings = {
     },
     "translate": {
       "toggle": false,
-      "language": "cn",
+      "language": "Simplified Chinese",
       "color": "grey",
       "style": "none"
     },
