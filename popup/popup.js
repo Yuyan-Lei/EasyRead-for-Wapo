@@ -1,16 +1,3 @@
-import {
-  translateArticleBody,
-  removeTranslation,
-} from "../handlers/translationHandler.js";
-import { simplifyArticleBody } from "../handlers/simplificationHandler.js";
-import {
-  generateSummary,
-  removeSummarySection,
-} from "../handlers/summaryHandler.js";
-import { getSummaryRequest } from "../api/openAI.js";
-
-
-
 const elements = [
     // switch
     document.getElementById("translate-toggle"),
