@@ -1,202 +1,172 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>EasyRead Settings</title>
-    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="options.css" />
-  </head>
-  <body>
-    <div class="shell">
-      <div
-        class="form-check form-switch form-switch-lg form-check-reverse popup-option enable-switch"
-      >
-        <label for="turn-on-toggle" class="form-check-label form-title"
-          >Settings</label
-        >
-      </div>
+<html lang="en">
 
-      <!-- Translation Form -->
-      <div class="form-subtitle">Translation</div>
-      <span class="tooltip-btn"
-        >&#9432;
-        <div class="simpler-tooltip">
-          Translate articles into the specified language, including other
-          display options.
-        </div>
-      </span>
-      <form class="optionsForm">
-        <div class="popup-option">
-          <label for="targetLanguage" class="form-check-label"
-            >Target Language
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="targetLanguage"
-            name="targetLanguage"
-          >
-            <option value="es" selected>Spanish</option>
-            <option value="cn">Simplified Chinese</option>
-          </select>
-        </div>
-        <hr />
-        <div class="popup-option">
-          <label for="translationService" class="form-check-label"
-            >Translation Service
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="translationService"
-            name="translationService"
-          >
-            <option value="openAI" selected>Open AI</option>
-            <option value="googleTranslatte">Google Translate</option>
-          </select>
-        </div>
-        <hr />
-        <div class="popup-option">
-          <label for="displayColor" class="form-check-label"
-            >Display Color
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="displayColor"
-            name="displayColor"
-          >
-            <option value="grey" selected>Grey</option>
-            <option value="blue">Blue</option>
-            <option value="orange">Orange</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-          </select>
-        </div>
-        <hr />
-        <div class="popup-option">
-          <label for="displayStyle" class="form-check-label"
-            >Display Style
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="displayStyle"
-            name="displayStyle"
-          >
-            <option value="none" selected>None</option>
-            <option value="italic">Italic</option>
-            <option value="bold">Bold</option>
-            <option value="underlined">Underlined</option>
-            <option value="dashed">Dashed</option>
-          </select>
-        </div>
-      </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EasyRead Settings</title>
+  <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="options.css" />
+  <script src="options.js"></script>
+</head>
 
-      <!-- Summary Form -->
-      <div class="form-subtitle">Summary</div>
-      <span class="tooltip-btn"
-        >&#9432;
-        <div class="simpler-tooltip">
-          Condense articles into short and long summaries.
-        </div>
-      </span>
-      <form class="optionsForm">
-        <div class="popup-option">
-          <label for="shortSummaryLength" class="form-check-label"
-            >Short Summary Length
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="shortSummaryLength"
-            name="shortSummaryLength"
-          >
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-          </select>
-        </div>
-        <hr />
-
-        <div class="popup-option">
-          <label for="longSummaryLength" class="form-check-label"
-            >Long Summary Length
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="longSummaryLength"
-            name="longSummaryLength"
-          >
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="500">500</option>
-          </select>
-        </div>
-      </form>
-      <div class="form-subtitle">Simplify</div>
-      <span class="tooltip-btn"
-        >&#9432;
-        <div class="simpler-tooltip">
-          Simplify article vocabulary for younger audiences.
-        </div>
-      </span>
-      <form class="optionsForm">
-        <div class="popup-option">
-          <label for="simplifyAge" class="form-check-label"
-            >Target Reading Level (age)
-          </label>
-          <select
-            class="form-select form-select-sm"
-            id="simplifyAge"
-            name="simplifyAge"
-          >
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-          </select>
-        </div>
-      </form>
-      <div class="form-subtitle">Customize Font</div>
-      <span class="tooltip-btn"
-        >&#9432;
-        <div class="simpler-tooltip">Improve readability for ADHD readers.</div>
-      </span>
-      <form class="optionsForm customize">
-        <div class="popup-option">
-          <label for="customize-font-toggle" class="form-check-label">
-            <a href="../popup/customize.html">Access Settings Here</a></label
-          >
-        </div>
-      </form>
-      <div class="popup-bottom row g-0">
-        <button id="submit-button" type="submit" class="btn btn-dark">
-          Save
-        </button>
-        <button class="col-1 settings-button" type="button" id="setting">
-          <a href="../popup/popup.html">
-            <svg
-              t="1690480960631"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="3263"
-              id="mx_n_1690480960632"
-              width="16"
-              height="16"
-            >
-              <path
-                d="M940.778 480.33l-1.235-1.578c-45.39-53.62-96.519-111.692-150.652-173.175l-0.124-0.142c-54.773-62.21-111.411-126.538-162.107-186.433l-0.494-0.583-1.034-1.07c-34.804-34.506-70.778-52-106.926-52-35.496 0-69.233 16.633-100.274 49.44l-0.523 0.57c-49.634 55.705-106.236 115.26-160.975 172.855-55.06 57.935-111.993 117.841-162.408 174.415-37.994 43.191-30.507 78.746-22.663 96.094 12.897 28.523 41.362 43.913 61.597 43.913h69.072v255.26c0 23.259 8.18 47.348 22.44 66.092 16.828 22.113 39.84 34.291 64.801 34.291h165.509l-0.041-255.201H590.3l0.202 255.201h165.479c23.148 0 45.415-11.277 61.093-30.938 17.351-21.767 26.15-52.048 26.15-90.003V602.633h48.334c25.559 0 47.748-13.546 59.357-36.238 13.497-26.378 9.707-58.552-10.138-86.065zM401.836 651.413l1.064 255.201H289.275c-11.395 0-19.73-8.715-23.683-13.908-7.446-9.787-11.892-22.8-11.892-34.808V550.972H133.413c-2.47-0.59-11.115-4.87-15.022-13.647-5.904-13.265 4.547-29.338 14.32-40.446 49.737-55.815 106.378-115.412 161.176-173.071 54.91-57.775 111.69-117.518 161.83-173.777 20.814-21.908 41.84-33.016 62.492-33.016 21.796 0 45.267 12.197 69.767 36.255 50.719 59.899 107.165 124.012 161.76 186.021l0.254 0.29c53.71 61 104.447 118.629 149.413 171.722 7.83 11.233 9.896 23.01 5.52 31.562-2.675 5.228-7.421 8.108-13.364 8.108h-99.997V837.34c0 47.597-18.443 69.276-35.58 69.276H642.335l0.822-255.2h-241.32z"
-                p-id="3264"
-                fill="#666666"
-              ></path>
-            </svg>
-            <span class="settings-label">Home</span>
-          </a>
-        </button>
-      </div>
-      <script src="options.js"></script>
+<body>
+  <div class="shell">
+    <div class="form-check form-switch form-switch-lg form-check-reverse popup-option enable-switch">
+      <label for="turn-on-toggle" class="form-check-label form-title">Settings</label>
     </div>
-  </body>
+
+    <!-- Translation Form -->
+    <div class="form-subtitle">Translation</div>
+    <span class="tooltip-btn">&#9432;
+      <div class="simpler-tooltip">
+        Translate articles into the specified language, including other
+        display options.
+      </div>
+    </span>
+    <form class="optionsForm">
+      <div class="popup-option">
+        <label for="targetLanguage" class="form-check-label">Target Language
+        </label>
+        <select class="form-select form-select-sm" id="targetLanguage" name="targetLanguage">
+          <option value="Simplified Chinese" selected>Simplified Chinese</option>
+          <option value="Spanish">Spanish</option>
+        </select>
+      </div>
+      <hr />
+      <div class="popup-option">
+        <label for="translationService" class="form-check-label">Translation Service
+        </label>
+        <select class="form-select form-select-sm" id="translationService" name="translationService">
+          <option value="openai" selected>Open AI</option>
+          <option value="googleTranslatte">Google Translate</option>
+        </select>
+      </div>
+      <hr />
+      <div class="popup-option">
+        <label for="displayColor" class="form-check-label">Display Color
+        </label>
+        <select class="form-select form-select-sm" id="displayColor" name="displayColor">
+          <option value="grey" selected>Grey</option>
+          <option value="blue">Blue</option>
+          <option value="orange">Orange</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+        </select>
+      </div>
+      <hr />
+      <div class="popup-option">
+        <label for="displayStyle" class="form-check-label">Display Style
+        </label>
+        <select class="form-select form-select-sm" id="displayStyle" name="displayStyle">
+          <option value="none" selected>None</option>
+          <option value="italic">Italic</option>
+          <option value="bold">Bold</option>
+          <option value="underlined">Underlined</option>
+          <option value="dashed">Dashed</option>
+        </select>
+      </div>
+    </form>
+
+    <!-- Summary Form -->
+    <div class="form-subtitle">Summary</div>
+    <span class="tooltip-btn">&#9432;
+      <div class="simpler-tooltip">
+        Condense articles into short and long summaries.
+      </div>
+    </span>
+    <form class="optionsForm">
+      <div class="popup-option">
+        <label for="shortSummaryLength" class="form-check-label">Short Summary Length
+        </label>
+        <select class="form-select form-select-sm" id="shortSummaryLength" name="shortSummaryLength">
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="300">300</option>
+        </select>
+      </div>
+      <hr />
+
+      <div class="popup-option">
+        <label for="longSummaryLength" class="form-check-label">Long Summary Length
+        </label>
+        <select class="form-select form-select-sm" id="longSummaryLength" name="longSummaryLength">
+          <option value="300">300</option>
+          <option value="400">400</option>
+          <option value="500">500</option>
+        </select>
+      </div>
+    </form>
+
+    <!-- Simplify Form -->
+    <div class="form-subtitle">Simplify</div>
+    <span class="tooltip-btn">&#9432;
+      <div class="simpler-tooltip">
+        Simplify article vocabulary for younger audiences.
+      </div>
+    </span>
+    <form class="optionsForm">
+      <div class="popup-option">
+        <label for="simplifyAge" class="form-check-label">Target Reading Level (age)
+        </label>
+        <select class="form-select form-select-sm" id="simplifyAge" name="simplifyAge">
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+        </select>
+      </div>
+    </form>
+
+    <!-- Customize Form -->
+    <div class="form-subtitle">Customize Font</div>
+    <span class="tooltip-btn">&#9432;
+      <div class="simpler-tooltip">Improve readability for ADHD readers.</div>
+    </span>
+    <form class="optionsForm customize">
+      <div class="popup-option">
+        <!-- <label for="customize-font-toggle" class="form-check-label">
+            <a href="../popup/customize.html">Access Settings Here</a></label
+          > -->
+        <label for="targetFont">Font</label>
+        <select class="form-select" id="targetFont" disabled>
+          <option selected>Loading...</option>
+        </select>
+      </div>
+      <div class="popup-option">
+        <label for="font-size" class="form-label">Size</label>
+        <!-- <input type="range" class="form-range" id="font-size" min="0.5" max="4" step="0.25" /> -->
+        <select class="form-select" id="font-size">
+        </select>
+      </div>
+      <div class="form-check form-switch form-switch-lg form-check-reverse popup-option">
+        <label for="bionic-toggle" class="form-check-label">Bionic Reading</label>
+        <input id="bionic-toggle" type="checkbox" class="form-check-input" role="switch" />
+      </div>
+    </form>
+    <div class="popup-bottom row g-0">
+      <button id="submit-button" type="submit" class="btn btn-dark">
+        Save
+      </button>
+      <button class="col-1 settings-button" type="button" id="setting">
+        <a href="../popup/popup.html">
+          <svg t="1690480960631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="3263" id="mx_n_1690480960632" width="16" height="16">
+            <path
+              d="M940.778 480.33l-1.235-1.578c-45.39-53.62-96.519-111.692-150.652-173.175l-0.124-0.142c-54.773-62.21-111.411-126.538-162.107-186.433l-0.494-0.583-1.034-1.07c-34.804-34.506-70.778-52-106.926-52-35.496 0-69.233 16.633-100.274 49.44l-0.523 0.57c-49.634 55.705-106.236 115.26-160.975 172.855-55.06 57.935-111.993 117.841-162.408 174.415-37.994 43.191-30.507 78.746-22.663 96.094 12.897 28.523 41.362 43.913 61.597 43.913h69.072v255.26c0 23.259 8.18 47.348 22.44 66.092 16.828 22.113 39.84 34.291 64.801 34.291h165.509l-0.041-255.201H590.3l0.202 255.201h165.479c23.148 0 45.415-11.277 61.093-30.938 17.351-21.767 26.15-52.048 26.15-90.003V602.633h48.334c25.559 0 47.748-13.546 59.357-36.238 13.497-26.378 9.707-58.552-10.138-86.065zM401.836 651.413l1.064 255.201H289.275c-11.395 0-19.73-8.715-23.683-13.908-7.446-9.787-11.892-22.8-11.892-34.808V550.972H133.413c-2.47-0.59-11.115-4.87-15.022-13.647-5.904-13.265 4.547-29.338 14.32-40.446 49.737-55.815 106.378-115.412 161.176-173.071 54.91-57.775 111.69-117.518 161.83-173.777 20.814-21.908 41.84-33.016 62.492-33.016 21.796 0 45.267 12.197 69.767 36.255 50.719 59.899 107.165 124.012 161.76 186.021l0.254 0.29c53.71 61 104.447 118.629 149.413 171.722 7.83 11.233 9.896 23.01 5.52 31.562-2.675 5.228-7.421 8.108-13.364 8.108h-99.997V837.34c0 47.597-18.443 69.276-35.58 69.276H642.335l0.822-255.2h-241.32z"
+              p-id="3264" fill="#666666"></path>
+          </svg>
+          <span class="settings-label">Home</span>
+        </a>
+      </button>
+    </div>
+
+  </div>
+</body>
+
 </html>

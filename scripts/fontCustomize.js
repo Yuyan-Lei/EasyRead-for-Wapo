@@ -66,7 +66,7 @@ let articleTextElts;
 
 
 (async () => {
-  chrome.storage.sync.get(['settings']).then(async(result) => {
+  chrome.storage.sync.get(['settings']).then(async (result) => {
     const mainSettings = result.settings['main-toggle']['toggle'];
     const on = result.settings['customize']['toggle'];
     const font = result.settings['customize']['font-family'];
@@ -79,9 +79,12 @@ let articleTextElts;
       articleTextElts = document.querySelectorAll("div.article-body > p");
       prepareBionicReading();
       updateUI(result.settings['customize']);
+
       
       
-      
+
+
+
       // const articleCount = articleBodies.length;
       // for (let i = 0; i < articleCount; i++) {
       //   articleBodies[i].style.setProperty("font-family", font, "important");

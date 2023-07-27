@@ -21,27 +21,44 @@ const toggleNameToStorageName = {
 }
 
 window.onload = () => {
-    chrome.storage.sync.get(['settings']).then((result) => {
-        console.log('onload:' + result.settings);
-        let currSettings;
-        if (result.settings) {
-            currSettings = result.settings;
+    loadFontOptions();
+
+}
+
+
+const loadFontOptions = async () => {
+    const result = await chrome.storage.sync.get(["settings"]);
+    const fonts = await chrome.runtime.sendMessage("getFontList");
+    let innerHTML = fonts
+        .map(f => `<option ${f.displayName === result.settings["font-family"] ? "selected" : ""}>${f.displayName}</option>`)
+        .join("");
+
+    const targetFontSelector = document.getElementById("targetFont");
+    targetFontSelector.innerHTML = `
+              <optgroup label="Built-in">
+                <option ${!result.settings["font-family"] ? "selected" : ""}>Default</option>
+                <option ${result.settings["font-family"] === "OpenDyslexic" ? "selected" : ""}>OpenDyslexic</option>
+              </optgroup>
+              <optgroup label="System fonts">
+                ${innerHTML}
+              </optgroup>
+            `;
+    
+    const currSettings = result.settings;
+    document.getElementById("turn-on-toggle").checked = currSettings["main-toggle"]["toggle"];
+    if (currSettings["main-toggle"]["toggle"]) {
+        elements.forEach(e => setSwitchDisableStatus(e, true));
+    }
+    elements.forEach(e => {
+        if (e.nodeName === 'INPUT') {
+            e.checked = currSettings[toggleNameToStorageName[e.id]]['toggle'];
         }
-        document.getElementById("turn-on-toggle").checked = currSettings["main-toggle"]["toggle"];
-        if (currSettings["main-toggle"]["toggle"]) {
-            elements.forEach(e => setSwitchDisableStatus(e, true));
+        else if (e.id === 'targetLanguage') {
+            e.value = currSettings["translate"]['language'];
         }
-        elements.forEach(e => {
-            if (e.nodeName === 'INPUT') {
-                e.checked = currSettings[toggleNameToStorageName[e.id]]['toggle'];
-            }
-            else if (e.id === 'targetLanguage') {
-                e.value = currSettings["translate"]['language'];
-            }
-            else if (e.id === 'targetFont') {
-                e.value = currSettings["customize"]['font-family'];
-            }
-        });
+        else if (e.id === 'targetFont') {
+            e.value = currSettings["customize"]['font-family'];
+        }
     });
 }
 
@@ -82,11 +99,12 @@ const defaultSettings = {
         "toggle": false,
         "language": "Simplified Chinese",
         "color": "grey",
-        "style": "none"
+        "style": "none",
+        "service": "openai"
     },
     "customize": {
         "toggle": false,
-        "font-family": "Arial",
+        "font-family": "Default",
         "font-size": 1.25,
         "bionic-reading": false
     },
@@ -100,6 +118,7 @@ const defaultSettings = {
         "long_length": 200
     }
 }
+
 function setBackToDefault() {
     elements.forEach(e => {
         e.disabled = true;
