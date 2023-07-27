@@ -3,12 +3,7 @@
   "name": "EasyRead for WaPo",
   "version": "1.0",
   "description": "EasyRead for WaPo is a Chrome extension that provides additional website customization of accessibility settings for the WaPo official website, while incorporating the capabilities of OpenAI to provide content-related features.",
-  "permissions": [
-    "tabs",
-    "activeTab",
-    "scripting",
-    "storage"
-  ],
+  "permissions": ["tabs", "activeTab", "scripting", "storage"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "action": {
     "default_popup": "popup/popup.html"
@@ -20,5 +15,6 @@
   },
   "background": {
     "service_worker": "scripts/background.js"
-  }
+  },
+  "options_page": "/options/options.html"
 }

@@ -8,8 +8,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   width: 410px;
   min-height: 339px;
-  padding: 32px;
-  border: black 1px solid;
+  padding: 32px 20px;
+  border: black 0.5px solid;
   /* margin: 20px */
 }
 
@@ -30,12 +30,12 @@ hr {
   /* margin-top: 0;
   margin-bottom: 8px; */
   margin: 0 0;
-  color: grey
+  color: grey;
 }
 
 .popup-options {
   border-radius: 8px;
-  /* padding: 3px 0; */
+  /* padding: -3px 0; */
   /* margin: 5px; */
   padding: 6.5px 0;
   background-color: rgba(239, 239, 239, 0.65);
@@ -58,8 +58,6 @@ hr {
   margin-right: auto;
 }
 
-
-
 .form-switch.form-switch-lg {
   margin-bottom: 1rem;
   /* JUST FOR STYLING PURPOSE */
@@ -72,13 +70,13 @@ hr {
 }
 
 .enable-switch input:checked {
-  background-color: #1976D2;
-  border-color: #1976D2;
+  background-color: #1976d2;
+  border-color: #1976d2;
 }
 
-.popup-options input:checked{
-  background-color: #42A5F5;
-  border-color: #42A5F5;
+.popup-options input:checked {
+  background-color: #42a5f5;
+  border-color: #42a5f5;
 }
 
 .form-select {
@@ -91,4 +89,13 @@ hr {
 #setting {
   background: none;
   border: none;
+}
+
+#setting a {
+  color: black;
+  transition: 0.3s;
+}
+
+#setting a:hover {
+  color: grey;
 }
