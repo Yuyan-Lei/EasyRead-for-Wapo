@@ -1,4 +1,5 @@
 (async () => {
+    if (true) {
     const targetLanguage = 'Simplified Chinese'; // TODO: get this from the storage
     const style = 'none' // TODO: get this from the storage
     const color = 'grey'
@@ -159,4 +160,11 @@
     }
 
     await traverseBodyNodes(document.body);
+} else {
+    // remove translation
+    const translationParagraphs = document.querySelectorAll('#translation-section');
+    translationParagraphs.forEach((paragraph) => {
+      paragraph.remove();
+    });
+}
 })();
