@@ -76,11 +76,12 @@
     }
 
     async function processDropCapLetter(node) {
-        // build a new node
-        const newNode= processNewNode(node, 'beforeend');
-        
         let translation = '';
         let paragraphText = node.innerHTML;
+
+        // build a new node
+        let newNode = buildNode(false);
+        node.insertAdjacentElement('beforeend', newNode);
 
         // remove bold tags
         const regexToRemoveBoldTag = /<b>\ <\/b>/g;
@@ -88,7 +89,6 @@
     
         const regex = /(<a[^>]*>.*?<\/a>)|[^<>]+/g;
         let match;
-        console.log(match);
         while ((match = regex.exec(paragraphText)) !== null) {
             if (match[1]) {
                 const regexATag = /(<a[^>]*>)(.*?)(<\/a>)/g;
