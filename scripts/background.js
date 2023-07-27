@@ -1,6 +1,7 @@
 import "../handlers/summaryHandler.js";
 import "../handlers/simplificationHandler.js";
 import "../handlers/translationHandler.js";
+import "../handlers/customizationHandler.js";
 
 chrome.runtime.onInstalled.addListener(function () {
   console.log('TranslatePage Extension installed.');
@@ -10,12 +11,15 @@ chrome.runtime.onInstalled.addListener(function () {
     },
     "translate": {
       "toggle": false,
-      "language": "cn",
+      "language": "Simplified Chinese",
       "color": "grey",
       "style": "none"
     },
     "customize": {
       "toggle": false,
+      "font-family": "Arial",
+      "font-size": 1.25,
+      "bionic-reading": false
     },
     "simple": {
       "toggle": false,
@@ -41,12 +45,15 @@ chrome.runtime.onStartup.addListener(() => {
         },
         "translate": {
           "toggle": false,
-          "language": "cn",
+          "language": "Simplified Chinese",
           "color": "grey",
           "style": "none"
         },
         "customize": {
           "toggle": false,
+          "font-family": "Arial",
+          "font-size": 1.25,
+          "bionic-reading": false
         },
         "simple": {
           "toggle": false,
@@ -63,11 +70,8 @@ chrome.runtime.onStartup.addListener(() => {
   });
 });
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request === "getFontList") {
-    chrome.fontSettings.getFontList(fonts => sendResponse(fonts));
-  } else {
-    console.log(request);
-  }
-  return true;
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  // chrome.tabs.reload();
 });
+
+

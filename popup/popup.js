@@ -22,7 +22,7 @@ const toggleNameToStorageName = {
 
 window.onload = () => {
     chrome.storage.sync.get(['settings']).then((result) => {
-        console.log('onload:' + JSON.stringify(result.settings));
+        console.log('onload:' + result.settings);
         let currSettings;
         if (result.settings) {
             currSettings = result.settings;
@@ -37,6 +37,9 @@ window.onload = () => {
             }
             else if (e.id === 'targetLanguage') {
                 e.value = currSettings["translate"]['language'];
+            }
+            else if (e.id === 'targetFont') {
+                e.value = currSettings["customize"]['font-family'];
             }
         });
     });
@@ -53,15 +56,17 @@ function updateSwitchStatus(element) {
         }
         else if (element.id === 'targetLanguage') {
             currSettings["translate"]['language'] = element.value;
+        } else {
+            currSettings["customize"]['font-family'] = element.value;
+            console.log(currSettings);
         }
-        console.log(currSettings);
         return currSettings;
     }).then((currSettings) => {
         chrome.storage.sync.set({ settings: currSettings });
     });
 }
 
-function setSwitchDisableStatus(element, status)  {
+function setSwitchDisableStatus(element, status) {
     if (!status && element.nodeName === 'INPUT' && element.checked) {
         element.checked = false;
         updateSwitchStatus(element);
@@ -71,35 +76,40 @@ function setSwitchDisableStatus(element, status)  {
 
 const defaultSettings = {
     "main-toggle": {
-      "toggle": false,
+        "toggle": false,
     },
     "translate": {
-      "toggle": false,
-      "language": "Simplified Chinese",
-      "color": "grey",
-      "style": "none"
+        "toggle": false,
+        "language": "Simplified Chinese",
+        "color": "grey",
+        "style": "none"
     },
     "customize": {
-      "toggle": false,
+        "toggle": false,
+        "font-family": "Arial",
+        "font-size": 1.25,
+        "bionic-reading": false
     },
     "simple": {
-      "toggle": false,
-      "age": 1
+        "toggle": false,
+        "age": 1
     },
     "summary": {
-      "toggle": false,
-      "short_length": 100,
-      "long_length": 200
+        "toggle": false,
+        "short_length": 100,
+        "long_length": 200
     }
-  }
+}
 function setBackToDefault() {
     elements.forEach(e => {
         e.disabled = true;
-        if (e.nodeName === 'INPUT'){
+        if (e.nodeName === 'INPUT') {
             e.checked = false;
-        } 
+        }
         else if (e.id === 'targetLanguage') {
             e.value = defaultSettings["translate"]['language'];
+        } else {
+            e.value = defaultSettings["customize"]['font-family'];
         }
     });
     chrome.storage.sync.set({ settings: defaultSettings })
@@ -114,7 +124,7 @@ function enableExtension() {
     } else {
         console.log("Unchecked the turn on option!");
         setBackToDefault();
-        
+
     }
 
 }
@@ -122,9 +132,9 @@ document.getElementById("turn-on-toggle").addEventListener("change", enableExten
 
 elements.forEach(e => {
     if (e.nodeName === 'INPUT') {
-        e.addEventListener("change", ()=> updateSwitchStatus(e));
-    } else{
-        e.addEventListener("change", ()=> updateSwitchStatus(e));
+        e.addEventListener("change", () => updateSwitchStatus(e));
+    } else {
+        e.addEventListener("change", () => updateSwitchStatus(e));
     }
 });
 
