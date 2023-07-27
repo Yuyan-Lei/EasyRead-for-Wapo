@@ -146,6 +146,8 @@
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (node.matches('span[data-qa="headline-text"]')) {
                         await processNewNode(node, 'afterend');
+                    } else if (node.matches('span[data-qa="headline-opinion-text"]')) {
+                        await processNewNode(node, 'afterend');
                     } else if (node.matches('h2[data-qa="subheadline"]')) {
                         await processNewNode(node, 'beforeend');
                     } else if (node.matches ('figcaption')) {

@@ -6,15 +6,33 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  width: 410px;
-  min-height: 339px;
-  padding: 32px;
-  border: black 1px solid;
-  /* margin: 20px */
+  width: 330px;
+  min-height: 270px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 12px;
+  padding-bottom: 16px;
 }
 
-.popup-header {
-  /* background-color: #eeeeee; */
+.popup-bottom {
+  margin-top: 6px;
+  margin-right: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.settings-button{
+  margin-left: auto;
+  width: fit-content;
+}
+.settings-label {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgb(100 100 100);
+}
+.form-title {
+  font-size: 12px;
+  padding-left: 4px;
 }
 
 .enable-switch {
@@ -23,21 +41,19 @@ body {
 
 .enable-switch label {
   font-weight: normal !important;
-  font-size: 16px !important;
+  font-size: 15px !important;
 }
 
 hr {
-  /* margin-top: 0;
-  margin-bottom: 8px; */
   margin: 0 0;
-  color: grey
+  color: rgb(200 200 190)
 }
 
 .popup-options {
   border-radius: 8px;
   /* padding: 3px 0; */
   /* margin: 5px; */
-  padding: 6.5px 0;
+  padding: 4px 0;
   background-color: rgba(239, 239, 239, 0.65);
   /* background-color: #eeeeee; */
 }
@@ -45,7 +61,7 @@ hr {
 .popup-option {
   /* margin-top: 4px;  */
 
-  margin: 11px 13px;
+  margin: 7px 13px;
   display: flex;
   /* text-align: end; */
   justify-content: end;
@@ -53,20 +69,13 @@ hr {
 }
 
 .popup-option label {
-  font-size: 15px;
-  font-weight: 550;
+  font-size: 12px;
+  font-weight: 500;
   margin-right: auto;
 }
 
-
-
-.form-switch.form-switch-lg {
-  margin-bottom: 1rem;
-  /* JUST FOR STYLING PURPOSE */
-}
-
 .form-switch.form-switch-lg .form-check-input {
-  height: 30.14px;
+  height: 24px;
   width: 48px;
   border-radius: 3rem;
 }
@@ -83,9 +92,11 @@ hr {
 
 .form-select {
   display: inline-block;
-  width: 130px;
+  width: 100px;
   margin-right: 5px;
-  border-radius: 50px;
+  border-radius: 30px;
+  font-size: 12px;
+  height: 28px;
 }
 
 #setting {
