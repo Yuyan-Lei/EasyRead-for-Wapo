@@ -28,7 +28,7 @@
                     width: 100%;
                     display: flex;
                     font-weight: bold; 
-                    padding: 4px 20px;
+                    padding: 8px 20px;
                     border: none;
                     cursor: pointer;
                 }
@@ -59,7 +59,7 @@
                     width: 100%;
                     display: flex;
                     font-weight: bold; 
-                    padding: 4px 20px;
+                    padding: 8px 20px;
                     border: none;
                     cursor: pointer;
                 }
@@ -76,7 +76,9 @@
             // Create the container div
             const shortContainer = document.createElement("div");
             shortContainer.id = "short-summary-container";
+            shortContainer.style.fontSize = "18px";
             const longContainer = document.createElement("div");
+            longContainer.style.fontSize = "18px";
             longContainer.id = "long-summary-container";
         
             // Add the button to the container div
@@ -104,11 +106,15 @@
             const shortSummaryDiv = document.createElement("p");
             shortSummaryDiv.id = "short-summary-section";
             shortSummaryDiv.innerText = `Loading...`;
+            shortSummaryDiv.style.color = "grey";
+            shortSummaryDiv.style.fontSize = "18px";
             shortContainer.appendChild(shortSummaryDiv);
         
             const longSummaryDiv = document.createElement("p");
             longSummaryDiv.id = "long-summary-section";
             longSummaryDiv.innerText = `Loading...`;
+            longSummaryDiv.style.color = "grey";
+            longSummaryDiv.style.fontSize = "18px";
             longContainer.appendChild(longSummaryDiv);
         
             // Listen for button clicks
@@ -167,16 +173,21 @@
                 'p[data-testid="drop-cap-letter"]'
             );
 
+            let articleText = '';
+            for (let i = 0; i < articleBodies.length; i++) {
+                if (articleText.length < 12000) articleText += articleBodies[i].innerText;
+            }
+
             // get summary from API
             const shortSummaryResponse = await chrome.runtime.sendMessage({
                 action: 'getSummary',
-                articleBodies: articleBodies,
+                articleText: articleText,
                 length: shortLength,
             })
             const shortSummaryText = shortSummaryResponse.result;
             const longSummaryResponse = await chrome.runtime.sendMessage({
                 action: 'getSummary',
-                articleBodies: articleBodies,
+                articleText: articleText,
                 length: longLength,
             })
             const longSummaryText = longSummaryResponse.result;
