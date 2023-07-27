@@ -1,25 +1,21 @@
 const saveOptions = () => {
   chrome.storage.sync.get(["settings"]).then((result) => {
+    console.log("hello");
     let currSettings = result.settings;
     console.log(JSON.stringify(result));
-    const form = document.querySelector(".optionsForm");
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+    // Get form values
+    const targetLanguage = document.getElementById("targetLanguage").value;
+    const simplifyAge = document.getElementById("simplifyAge").value;
+    const summaryLength = document.getElementById("summaryLength").value;
 
-      // Get form values
-      const targetLanguage = document.getElementById("targetLanguage").value;
-      const simplifyAge = document.getElementById("simplifyAge").value;
-      const summaryLength = document.getElementById("summaryLength").value;
+    currSettings["translate"]["language"] = targetLanguage;
+    currSettings["simple"]["age"] = simplifyAge;
+    currSettings["summary"]["length"] = summaryLength;
 
-      currSettings["translate"]["language"] = targetLanguage;
-      currSettings["simple"]["age"] = simplifyAge;
-      currSettings["summary"]["length"] = summaryLength;
-
-      // Save settings to chrome.storage.sync
-      chrome.storage.sync.set({ settings: currSettings }, function () {
-        console.log("New Settings:", JSON.stringify(currSettings));
-      });
+    // Save settings to chrome.storage.sync
+    chrome.storage.sync.set({ settings: currSettings }, function () {
+      console.log("New Settings:", JSON.stringify(currSettings));
     });
   });
   console.log("New Settings:", JSON.stringify(currSettings));
@@ -27,6 +23,7 @@ const saveOptions = () => {
 
 const restoreOptions = () => {
   chrome.storage.sync.get(["settings"]).then((result) => {
+    console.log(result);
     document.getElementById("targetLanguage").value =
       result.settings["translate"]["language"];
     document.getElementById("simplifyAge").value =

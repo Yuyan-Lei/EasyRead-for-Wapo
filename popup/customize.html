@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>EasyRead for WaPo</title>
-    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="../library/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <a href="popup.html">&larr;&nbsp;Back</a>
-    <div style="height:15px;"></div>
+    <a href="../options/options.html">&larr;&nbsp;Back</a>
+    <div style="height: 15px"></div>
     <h1>Customize</h1>
 
     <div class="popup-options">
@@ -24,19 +24,37 @@
 
       <div class="form-group popup-option">
         <label for="font-size" class="form-label">Size</label>
-        <input type="range" class="form-range" id="font-size" min="0.5" max="4" step="0.25">
+        <input
+          type="range"
+          class="form-range"
+          id="font-size"
+          min="0.5"
+          max="4"
+          step="0.25"
+        />
       </div>
 
       <hr />
 
-      <div class="form-check form-switch form-switch-lg form-check-reverse popup-option">
-        <label for="bionic-toggle" class="form-check-label small">Bionic Reading</label>
-        <input id="bionic-toggle" type="checkbox" class="form-check-input" role="switch">
+      <div
+        class="form-check form-switch form-switch-lg form-check-reverse popup-option"
+      >
+        <label for="bionic-toggle" class="form-check-label small"
+          >Bionic Reading</label
+        >
+        <input
+          id="bionic-toggle"
+          type="checkbox"
+          class="form-check-input"
+          role="switch"
+        />
       </div>
     </div>
 
     <div class="row justify-content-center">
-      <button type="button" class="btn btn-primary" id="reset-btn">Reset to defaults</button>
+      <button type="button" class="btn btn-primary" id="reset-btn">
+        Reset to defaults
+      </button>
     </div>
 
     <script src="../scripts/customize.js"></script>
