@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
   },
   "translate": {
     "toggle": false,
-    "language": "Simplified Chinese",
+    "language": "zh",
     "color": "grey",
     "style": "none",
     "service": "openai"

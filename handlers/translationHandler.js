@@ -1,18 +1,35 @@
-import { OPEN_AI_KEY } from "../apiKey.js";
+import { OPEN_AI_KEY, GOOGLE_API_KEY } from "../apiKey.js";
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     console.log("Listener called --  translation");
     if (message.action === "getTranslation") {
       if (message.service === "openai") {
-      getTranslationRequest(message.targetLanguage, message.text).then((result) => {
+        getTranslationRequest(message.targetLanguage, message.text).then((result) => {
             sendResponse({ result: result });
         });
         return true;
     } else if (message.service === "googleTranslate") {
-
+        getGoogleTranslate(message.targetLanguage, message.text).then((result) => {
+          sendResponse({ result: result });
+        });
+        return true;
     }
   } 
 });
+
+async function getGoogleTranslate(targetLanguage, originalText) {
+  console.log(targetLanguage);
+  const data = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}`, {
+    method: "POST",
+    body: JSON.stringify({
+      q: originalText,
+      target: targetLanguage,
+    }),
+  }).then((response) => response.json());
+  console.log(data);
+  const translatedText = data.data.translations[0].translatedText;
+  return translatedText;
+}
 
 async function sendRequest(requestData) {
     const apiKey = OPEN_AI_KEY;

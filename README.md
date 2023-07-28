@@ -4,6 +4,14 @@ EasyRead for WaPo is a Chrome extension that provides additional website customi
 ## Installation
 Follow the steps below to install and use this Extension:
 
+- Download this repository
+
+- Add a file named `apiKey.js`, which includes the follow information:
+    ```javascript
+    export const OPEN_AI_KEY = "YOUR_API_KEY";
+    export const GOOGLE_API_KEY = "YOUR_API_KEY"
+    ```
+
 - Open the Chrome browser.
 
 - Navigate to the extensions management page by entering chrome://extensions/ in the address bar and pressing Enter.
@@ -23,8 +31,4 @@ After installing EasyRead Extension, you can find its icon in the Chrome browser
 
 - Click on the EasyRead Extension icon in the toolbar.
 
-- A popup window will appear, allowing you to select your desired target language from the dropdown list.
-
-- After selecting the target language, click the "Translate Page" button.
-
-- The page content will be translated, and below each paragraph, you will see the translated text.
+- A popup window will appear, allowing you to select your desired options.

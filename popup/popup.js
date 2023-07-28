@@ -97,7 +97,7 @@ const defaultSettings = {
     },
     "translate": {
         "toggle": false,
-        "language": "Simplified Chinese",
+        "language": "zh",
         "color": "grey",
         "style": "none",
         "service": "openai"
