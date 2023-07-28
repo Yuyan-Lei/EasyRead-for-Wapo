@@ -29,8 +29,19 @@ For more information, see the documentation [here](https://developer.chrome.com/
 ## How to Use
 After installing EasyRead Extension, you can find its icon in the Chrome browser's toolbar.
 
-- Open any webpage that you want to translate.
+- Open any page that you want to read on the Washington Post website.
 
 - Click on the EasyRead Extension icon in the toolbar.
 
 - A popup window will appear, allowing you to select your desired options.
+
+## Introductions to Features
+![Image1](./images/pics/EadyRead%20Extension-1.png)
+![Image2](./images/pics/EadyRead%20Extension-2.png)
+![Image3](./images/pics/EadyRead%20Extension-3.png)
+![Image4](./images/pics/EadyRead%20Extension-4.png)
+![Image5](./images/pics/EadyRead%20Extension-5.png)
+![Image6](./images/pics/EadyRead%20Extension-6.png)
+![Image7](./images/pics/EadyRead%20Extension-7.png)
+![Image8](./images/pics/EadyRead%20Extension-8.png)
+![Image9](./images/pics/EadyRead%20Extension-9.png)
