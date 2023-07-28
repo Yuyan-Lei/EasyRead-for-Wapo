@@ -8,6 +8,8 @@ Of course, for each feature, we offer a wide range of personalized settings, suc
 
 Most importantly, while currently, it's a Chrome extension, it's fundamentally a script injection. This means the script can be injected into any browser through tools like Tampermonkey, or can be directly integrated into our website like what Subs Tetro script does.
 
+**Watch a demo video [here](https://youtu.be/xai3CTXPgyo)!**
+
 ## Installation
 Follow the steps below to install and use this Extension:
 
