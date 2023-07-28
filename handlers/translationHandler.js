@@ -1,12 +1,17 @@
 import { OPEN_AI_KEY } from "../apiKey.js";
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     console.log("Listener called --  translation");
     if (message.action === "getTranslation") {
+      if (message.service === "openai") {
       getTranslationRequest(message.targetLanguage, message.text).then((result) => {
             sendResponse({ result: result });
         });
         return true;
+    } else if (message.service === "googleTranslate") {
+
     }
+  } 
 });
 
 async function sendRequest(requestData) {

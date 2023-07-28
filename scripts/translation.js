@@ -5,6 +5,7 @@
         const style = result.settings['translate']['style'];
         const color = result.settings['translate']['color'];
         const targetLanguage = result.settings['translate']['language'];
+        const translateService = result.settings['translate']['service'];
         
         if (mainSettings && on) {
             // main function
@@ -122,6 +123,7 @@
                     action: 'getTranslation',
                     text: node.innerText,
                     targetLanguage: targetLanguage,
+                    service: translateService,
                 })
                 const text = response.result;
                 newNode.innerText = text;
@@ -136,6 +138,7 @@
                     action: 'getTranslation',
                     text: text,
                     targetLanguage: targetLanguage,
+                    service: translateService,
                 })
                 const translatedText = response.result;
                 newNode.innerText = translatedText;
@@ -170,6 +173,7 @@
                             action: 'getTranslation',
                             text: textBeforeTrans,
                             targetLanguage: targetLanguage,
+                            service: translateService,
                         })
                         const translatedText = textResponse.result;
                         const result = ` ${openingTag}${translatedText}${closingTag} `;
@@ -180,6 +184,7 @@
                             action: 'getTranslation',
                             text: match[0],
                             targetLanguage: targetLanguage,
+                            service: translateService,
                         })
                         const translatedText = textResponse.result;
                         translation += translatedText;
@@ -201,6 +206,7 @@
                     action: 'getTranslation',
                     text: text,
                     targetLanguage: targetLanguage,
+                    service: translateService,
                 })
                 const translatedText = textResponse.result;
                 newNode.innerHTML = `<a href="${link}">${translatedText}</a>`;
