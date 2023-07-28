@@ -8,7 +8,9 @@ Follow the steps below to install and use this Extension:
 
 - Add a file named `apiKey.js`, which includes the follow information:
     ```javascript
+    // open ai key is required
     export const OPEN_AI_KEY = "YOUR_API_KEY";
+    // google api is optional
     export const GOOGLE_API_KEY = "YOUR_API_KEY"
     ```
 
