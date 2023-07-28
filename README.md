@@ -1,5 +1,12 @@
 ## Introduction
-EasyRead for WaPo is a Chrome extension that provides additional website customization of accessibility settings for the WaPo official website, while incorporating the capabilities of OpenAI to provide content-related features.
+EasyRead is a Chrome extension that brings a whole new level of customization and accessibility to The Washington Post website. 
+ 
+EasyRead offering deep customization options for various settings, including various forms of bilingual immersive translation, personalized font settings, switching to easy-to-read versions of articles, and generating summaries of various lengths. This plugin caters to the personalized reading needs of individuals and is especially suitable for young or educationally disadvantaged people, ADHD users, and non-English speakers.
+
+After using EasyRead, the webpage retains its original layout (even with in-text URLs!), seamlessly integrated for an enhanced native reading experience.
+Of course, for each feature, we offer a wide range of personalized settings, such as display lengths, styles, level of simplification, and more.
+
+Most importantly, while currently, it's a Chrome extension, it's fundamentally a script injection. This means the script can be injected into any browser through tools like Tampermonkey, or can be directly integrated into our website like what Subs Tetro script does.
 
 ## Installation
 Follow the steps below to install and use this Extension:
